@@ -14,6 +14,8 @@ where mistakes are safety-critical. Insights and tools carry forward from one st
 ```
 src/mmsafety/
   clip.py        CLIP wrapper: residual lens into joint space, exact per-head/MLP decomposition
+  dual_encoders.py  CLIP + SigLIP behind one interface (for cross-encoder comparisons)
+  similarity.py  linear CKA (model diffing)
   images.py      synthetic stimuli (text stamping)
   models.py      LLaVA + Qwen-VL behind one VLM interface (vit.{i}, projector, lm.{i}, final_norm)
   hooks.py       record activations / patch module outputs
@@ -43,6 +45,7 @@ Need a CUDA box: `llava-hf/llava-1.5-7b-hf` (the canonical LLaVA), 7B+ Qwen, dri
 | CLIP | 01 | At which layer does the class become readable from CLS? Where spatially? | `experiments/clip/01_residual_lens.py` |
 | CLIP | 02 | Which heads/MLPs directly write the class into the embedding? Does removing them flip it? | `experiments/clip/02_direct_effects.py` |
 | CLIP | 03 | Typographic attacks: which components let written text beat what's pictured? | `experiments/clip/03_typographic_attack.py` |
+| CLIP | 04 | Model diff CLIP vs SigLIP (same ViT-B/16): behavior, embedding geometry, layerwise CKA + probes, text-reading | `experiments/clip/04_clip_vs_siglip_diff.py` |
 | VLM | 01 | At which LM layers do image tokens decode to object words, and where? | `experiments/vlm/01_image_token_logit_lens.py` |
 
 See [notes/ROADMAP.md](notes/ROADMAP.md).
